@@ -3,7 +3,7 @@ import json
 import streamlit as st
 
 # return place_id of nearest location of point of interest
-@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
+@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None, "builtins.weakref": lambda _: None,})
 def searchForPOI(livingAddress, poi):
     global returnList 
     returnList = []
