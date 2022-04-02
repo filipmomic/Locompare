@@ -3,7 +3,7 @@ import requests
 import json
 import streamlit as st
 
-@st.cache(allow_output_mutation=True,hash_funcs={"_thread.RLock": lambda _: None})
+@st.cache(hash_funcs={"_thread.RLock": lambda _: None, "builtins.weakref": lambda _: None})
 def getDistanceMatrix(address, arrPOI, mode):
     global arrPlaceID
     arrPlaceID = []
