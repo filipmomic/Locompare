@@ -15,7 +15,7 @@ def getDistanceMatrix(address, arrPOI, mode):
             "origins" : str(address.latitude) + "," + str(address.longitude),
             "destinations": "place_id:"+ "|place_id:".join(arrPlaceID),
             "mode": mode,
-            "key" : "AIzaSyA3RJoMU1-RCAG5T792EQvVHgwjAhlxM04" #st.secrets["gcp_api_key"]
+            "key" : st.secrets["gcp_api_key"]
         }
 
     # return place_id of nearest point of interest
