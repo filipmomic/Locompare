@@ -123,7 +123,12 @@ if submitBtn:
                 callDistApi(livingAddrArr[i], addressWithPOIArr[i], mode)
 
         resultMsg = st.empty()
-
+        
+        st.write(livingAddress1)
+        st.write(arrPOI)
+        st.write(distArr[0])
+        st.write(mode)
+        
         dfAddr1Results = dfConv.convertToDataFrame('current',livingAddress1, arrPOI, distArr[0], mode)
         dfAddr2Results = dfConv.convertToDataFrame('new',livingAddress2, arrPOI, distArr[1], mode)
 
