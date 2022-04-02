@@ -1,7 +1,7 @@
 from geopy.geocoders import Nominatim
 import streamlit as st
 
-@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
+@st.cache(allow_output_mutation=True)
 def getInputAddress(inputAddress):
     noValidAddress = True
     global location
