@@ -119,32 +119,30 @@ if submitBtn:
         def callDistApi(livingAddrArr,addressWithPOIArr,mode):
             distArr.append(dist.getDistanceMatrix(livingAddrArr, addressWithPOIArr, mode))
 
-        try:
-            for i, addr in enumerate(livingAddrArr):        
-                    callDistApi(livingAddrArr[i], addressWithPOIArr[i], mode)
+        for i, addr in enumerate(livingAddrArr):        
+                callDistApi(livingAddrArr[i], addressWithPOIArr[i], mode)
+
+        resultMsg = st.empty()
+
+        dfAddr1Results = dfConv.convertToDataFrame('current',livingAddress1, arrPOI, distArr[0], mode)
+        dfAddr2Results = dfConv.convertToDataFrame('new',livingAddress2, arrPOI, distArr[1], mode)
+
+        #union two result dfs
+        df = pd.concat([dfAddr1Results, dfAddr2Results])
+        #sec to mins
+        df["Duration (min)"] = df["Duration (s)"]/60
+        # meters to km to miles
+        df["Distance (mi)"] = (df["Distance (m)"]/1000)*0.621371
+        #finalDf.to_csv('results.csv')
+        df = df[["Address","POI","POI Address", "Mode", "Duration (min)","Distance (mi)"]]
+
+        st.write(df)
+        render_chart(df)
+        dfGroupBy = df.groupby(["Address"], as_index=False).sum()
+        dfMinAddr = dfGroupBy[dfGroupBy["Duration (min)"] == dfGroupBy["Duration (min)"].min()]
+        betterAddr = str(dfMinAddr['Address'].iloc[0])
+        resultMsg.success(f"Here's what I found: **{betterAddr} is better.**")
             
-            resultMsg = st.empty()
-            
-            dfAddr1Results = dfConv.convertToDataFrame('current',livingAddress1, arrPOI, distArr[0], mode)
-            dfAddr2Results = dfConv.convertToDataFrame('new',livingAddress2, arrPOI, distArr[1], mode)
-            
-            #union two result dfs
-            df = pd.concat([dfAddr1Results, dfAddr2Results])
-            #sec to mins
-            df["Duration (min)"] = df["Duration (s)"]/60
-            # meters to km to miles
-            df["Distance (mi)"] = (df["Distance (m)"]/1000)*0.621371
-            #finalDf.to_csv('results.csv')
-            df = df[["Address","POI","POI Address", "Mode", "Duration (min)","Distance (mi)"]]
-            
-            st.write(df)
-            render_chart(df)
-            dfGroupBy = df.groupby(["Address"], as_index=False).sum()
-            dfMinAddr = dfGroupBy[dfGroupBy["Duration (min)"] == dfGroupBy["Duration (min)"].min()]
-            betterAddr = str(dfMinAddr['Address'].iloc[0])
-            resultMsg.success(f"Here's what I found: **{betterAddr} is better.**")
-        except:
-            resultMsg.error("Oops.. something went wrong. Please try again.")
     #rec1["Duration (min)"].min("Duration (min)")
     #st.write(rec2[rec1["Duration (min)"]=="Duration (min)"])
     
