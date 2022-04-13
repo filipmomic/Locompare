@@ -5,4 +5,6 @@ Locompare tells users which of the addresses they entered is better located for 
 
 Locompare is built using Python with the Streamlit package. It interacts with multiple APIs to get intelligent location data based on user inputs.
 
-Google Cloud Platform API Key will be required to re-use and run this application locally.R
+Google Cloud Platform API Key will be required to re-use and run this application locally.
+
+*locompare.py* is the main program that is called by Streamlit application.
