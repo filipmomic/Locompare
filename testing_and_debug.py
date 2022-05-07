@@ -7,9 +7,9 @@ import pandas as pd
 import dataframeconversion as dfConv
 
 if __name__ == "__main__":
-    livingAddress1 = getInputAddress("1325 Utica Ave S St Louis Park MN 55416")
+    livingAddress1 = getInputAddress("1234 Address")
     print(livingAddress1)
-    livingAddress2 = getInputAddress("7350 Gallagher Dr Edina MN 55435")
+    livingAddress2 = getInputAddress("5678 Address")
 
     # remove duplicates if entered by user
     arrPOI = ['target','starbucks','costco']
