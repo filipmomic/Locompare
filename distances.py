@@ -5,7 +5,7 @@ import streamlit as st
 
 @st.cache(hash_funcs={"_thread.RLock": lambda _: None, "builtins.weakref": lambda _: None})
 def getDistanceMatrix(address, arrPOI, mode):
-    global arrPlaceID
+
     arrPlaceID = []
     
     for POI in arrPOI:
